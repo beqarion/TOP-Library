@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0"
+    />
+    <title>Project | Library</title>
+    <link
+      rel="stylesheet"
+      href="./style.css"
+    />
+  </head>
+  <body>
+    <main>
+      <div class="container">
+        <header>
+          <!-- dialog -->
+          <dialog id="dialog">
+            <form method="dialog">
+              <!-- input title -->
+              <p>
+                <label>
+                  Title:
+                  <input
+                    name="title"
+                    type="text"
+                    required
+                  />
+                </label>
+              </p>
+              <!-- input author -->
+              <p>
+                <label>
+                  Author:
+                  <input
+                    name="author"
+                    type="text"
+                    required
+                  />
+                </label>
+              </p>
+              <!-- input pages -->
+              <p>
+                <label>
+                  Page quantity:
+                  <input
+                    name="pages"
+                    type="number"
+                    required
+                  />
+                </label>
+              </p>
+              <!-- input read bool -->
+              <p>
+                <label>
+                  Have you read it:
+                  <input
+                    type="checkbox"
+                    name="read"
+                  />
+                </label>
+              </p>
+              <div>
+                <input
+                  type="submit"
+                  id="cancel"
+                  value="Cancel"
+                  formnovalidate
+                />
+                <input
+                  type="submit"
+                  id="submit"
+                  value="Add Book"
+                />
+              </div>
+            </form>
+          </dialog>
+          <!-- Add Book btn -->
+          <p>
+            <button id="add-book">NEW BOOK</button>
+          </p>
+        </header>
+        <!-- books container -->
+        <div class="books-container">
+          <article
+            class="book"
+            data-id="0"
+          >
+            <h4>The Great Gatsby by F. Scott Fitzgerald, 180 pages, read</h4>
+            <footer>
+              <input
+                type="checkbox"
+                id="toggle-read"
+              />
+              <button
+                id="delete-button"
+                data-id="1"
+              >
+                <img
+                  src="./images/trash-bin.svg"
+                  alt="delete book icon"
+                />
+              </button>
+            </footer>
+          </article>
+        </div>
+      </div>
+    </main>
+
+    <script src="./script.js"></script>
+  </body>
+</html>
