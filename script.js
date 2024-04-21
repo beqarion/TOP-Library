@@ -42,16 +42,17 @@ function addBookToLibrary() {
 }
 
 // render books
-function renderBooks(inHere) {
+function renderBooks() {
   const booksHtml = myLibrary
     .map((el, i) => {
       return `<article class="book" data-id=${i}>
-    <h4>${el.info()}</h4>
+    <h4 class='book-content'>${el.info()}</h4>
     <footer>
       <input
         type="checkbox"
         class="toggle-read"
         data-id=${i}
+        ${el.read ? "checked" : ""}
       />
       <button
         class="delete-button"
@@ -67,6 +68,30 @@ function renderBooks(inHere) {
     })
     .join("");
   document.querySelector(".books-container").innerHTML = booksHtml;
+  addEventHandlersBook();
+}
+
+// add event listeners to every books delete and checkRead buttons
+function addEventHandlersBook() {
+  const books = document.querySelectorAll(".book");
+  if (books.length <= 0) {
+    return;
+  }
+  books.forEach((bookDOM) => {
+    const deleteBtn = bookDOM.querySelector(".delete-button");
+    const toggleRead = bookDOM.querySelector(".toggle-read");
+
+    // delete book
+    deleteBtn.addEventListener("click", () => {
+      myLibrary.splice(deleteBtn.dataset.id, 1);
+      renderBooks();
+    });
+    // edit book
+    toggleRead.addEventListener("change", () => {
+      myLibrary[toggleRead.dataset.id].readToggler();
+      renderBooks();
+    });
+  });
 }
 
 // The dialog box
@@ -95,4 +120,4 @@ form.addEventListener("submit", function () {
   renderBooks(booksContainer);
 });
 
-// delete book, edit book
+document.addEventListener("DOMContentLoaded", renderBooks);

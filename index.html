@@ -22,7 +22,7 @@
               <!-- input title -->
               <p>
                 <label>
-                  Title:
+                  <span>Title:</span>
                   <input
                     name="title"
                     type="text"
@@ -33,7 +33,7 @@
               <!-- input author -->
               <p>
                 <label>
-                  Author:
+                  <span>Author:</span>
                   <input
                     name="author"
                     type="text"
@@ -44,7 +44,7 @@
               <!-- input pages -->
               <p>
                 <label>
-                  Page quantity:
+                  <span>Page quantity:</span>
                   <input
                     name="pages"
                     type="number"
@@ -55,7 +55,7 @@
               <!-- input read bool -->
               <p>
                 <label>
-                  Have you read it:
+                  <span>Have you read it:</span>
                   <input
                     type="checkbox"
                     name="read"
@@ -68,6 +68,11 @@
                   id="cancel"
                   value="Cancel"
                   formnovalidate
+                />
+                <input
+                  type="reset"
+                  id="reset"
+                  value="Reset"
                 />
                 <input
                   type="submit"

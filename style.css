@@ -133,6 +133,16 @@ table {
   border-spacing: 0;
 }
 
+/* 
+==============
+Variables
+==============
+*/
+:root {
+  --book-width: 150px;
+  --book-height: 245px;
+}
+
 /* Page styling */
 
 ::backdrop {
@@ -155,24 +165,28 @@ main {
   padding-right: 1rem;
   padding-left: 1rem;
 }
+@media screen and (min-width: 1200px) {
+  .container {
+    padding: 0;
+  }
+}
 
 /* header */
 header {
   padding-top: 1rem;
   padding-bottom: 1rem;
-  margin-bottom: 2.5rem;
 }
 
 /* book container */
 .books-container {
   display: grid;
-  grid-template-columns: repeat(auto-fill, 95px);
-  grid-template-rows: repeat(auto-fill, 145px);
+  grid-template-columns: repeat(auto-fill, var(--book-width));
+  grid-template-rows: repeat(auto-fill, var(--book-height));
   gap: 5px;
 }
 .book {
-  width: 95px;
-  height: 145px;
+  width: var(--book-width);
+  height: var(--book-height);
   border: 1px solid hsla(0, 0%, 10%, 0.3);
   border-radius: 3px;
   box-shadow: 1px 1px 2px hsla(0, 0%, 10%, 0.3);
@@ -181,6 +195,9 @@ header {
   overflow: hidden;
   display: grid;
   grid-template-rows: 1fr auto;
+}
+.book-content {
+  overflow-y: hidden;
 }
 
 .book footer {
@@ -200,4 +217,14 @@ header {
 .book img {
   width: 10px;
   height: auto;
+}
+
+/* modal dialog */
+#dialog form p:not(:last-of-type) label {
+  display: flex;
+  justify-content: space-between;
+  gap: 0.5rem;
+}
+form p {
+  margin-bottom: 0.5rem;
 }
