@@ -16,7 +16,7 @@ This is a simple library app designed to demonstrate basic HTML/CSS/JS skills. T
 
 ## How to Use
 
-1. Clone the repository: `clone https://github.com/beqarion/TOP-Library`
+1. Clone the repository: `git clone https://github.com/beqarion/TOP-Library.git`
 
 2. Open `index.html` in your web browser.
 
