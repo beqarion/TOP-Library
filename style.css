@@ -3,11 +3,6 @@
 Reset CSS
 ==============
 */
-*,
-*::before,
-*::after {
-  box-sizing: border-box;
-}
 html,
 body,
 div,
@@ -133,6 +128,12 @@ table {
   border-spacing: 0;
 }
 
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
 /* 
 ==============
 Variables
@@ -141,6 +142,22 @@ Variables
 :root {
   --book-width: 150px;
   --book-height: 245px;
+  --font-1: "Times New Roman", Times, serif;
+  --font-2: Arial, sans-serif;
+}
+
+/* Global Styles */
+body {
+  font-family: var(--font-2);
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--font-1);
+  font-weight: bold;
 }
 
 /* Page styling */
@@ -160,11 +177,11 @@ main {
   min-height: 100vh;
 }
 .container {
+  width: 90vw;
   max-width: 980px;
   margin: 0 auto;
-  padding-right: 1rem;
-  padding-left: 1rem;
 }
+
 @media screen and (min-width: 1200px) {
   .container {
     padding: 0;
@@ -176,47 +193,132 @@ header {
   padding-top: 1rem;
   padding-bottom: 1rem;
 }
+#add-book {
+  padding: 0.75rem;
+  background: linear-gradient(
+    to right,
+    #020024,
+    #090979,
+    #00d4ff,
+    #ff00e0,
+    #660066
+  );
+  color: white;
+  border-radius: 3px;
+  font-weight: bold;
+}
 
 /* book container */
 .books-container {
   display: grid;
-  grid-template-columns: repeat(auto-fill, var(--book-width));
-  grid-template-rows: repeat(auto-fill, var(--book-height));
-  gap: 5px;
+  grid-template-columns: 1frs;
+  gap: 1rem;
+  padding-bottom: 5rem;
+}
+@media screen and (min-width: 350px) {
+  .books-container {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+@media screen and (min-width: 576px) {
+  .books-container {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+}
+@media screen and (min-width: 768px) {
+  .books-container {
+    grid-template-columns: repeat(4, 1fr);
+  }
 }
 .book {
-  width: var(--book-width);
-  height: var(--book-height);
-  border: 1px solid hsla(0, 0%, 10%, 0.3);
+  aspect-ratio: 1/1.62;
+  border: 1px solid hsla(0, 0%, 0%, 0.3);
   border-radius: 3px;
-  box-shadow: 1px 1px 2px hsla(0, 0%, 10%, 0.3);
   padding: 0.5rem;
-  word-wrap: break-word;
-  overflow: hidden;
   display: grid;
   grid-template-rows: 1fr auto;
-}
-.book-content {
-  overflow-y: hidden;
-}
+  gap: 0.5rem;
+  box-shadow: 1px 1px 5px hsla(162, 20%, 46%, 0.3);
 
-.book footer {
-  display: flex;
-  justify-content: space-between;
-}
+  & .book-content {
+    overflow-y: hidden;
+    display: grid;
+    grid-template-rows: 1fr auto;
+    gap: 0.5rem;
 
-.book footer input {
-  margin: 0;
-}
+    & .book-title {
+      font-size: 1.5rem;
+      margin-bottom: 0.5rem;
+    }
+    & .book-by {
+      margin-bottom: 0.5rem;
+      color: hsla(0, 0%, 0%, 0.8);
+    }
+    & .book-author {
+      font-variant: small-caps;
+    }
+    & > :last-child {
+      display: flex;
+      justify-content: space-between;
+      font-family: monospace;
+      font-size: 0.75rem;
+      color: hsla(0, 0%, 0%, 0.8);
+      letter-spacing: -1px;
+    }
+  }
 
-.book footer button {
-  padding: 0;
-  border: none;
-  background: none;
+  & footer {
+    background: linear-gradient(
+      to right,
+      transparent,
+      transparent,
+      hsla(0, 0%, 0%, 0.05)
+    );
+    position: relative;
+
+    border-radius: 3px;
+    & .dropBtn {
+      display: flex;
+      justify-content: flex-end;
+    }
+    & .dropBtn:after {
+      content: "\2807";
+      font-size: 1.6rem;
+      cursor: pointer;
+      color: hsla(0, 0%, 0%, 0.7);
+      letter-spacing: -0.5rem;
+    }
+    & .dropdown-content {
+      gap: 0.5rem;
+      display: none;
+      position: absolute;
+      background: white;
+      box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+      padding: 1rem;
+      border-radius: 5px;
+    }
+    & .show {
+      display: grid;
+    }
+    & input {
+      margin: 0;
+    }
+    & .delete-button {
+      padding: 0;
+      border: none;
+      background: none;
+
+      & img {
+        width: 10px;
+        height: auto;
+      }
+    }
+  }
 }
-.book img {
-  width: 10px;
-  height: auto;
+@media screen and (min-width: 768px) {
+  .book {
+    padding: 1rem;
+  }
 }
 
 /* modal dialog */

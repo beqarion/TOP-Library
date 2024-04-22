@@ -20,7 +20,7 @@ function Book(title, author, pages, read = false) {
 }
 Book.prototype.info = function () {
   return `${this.title} by ${this.author}, ${this.pages} pages, ${
-    this.read ? "read" : "not read yet"
+    this.read ? "read" : "not read"
   }`;
 };
 Book.prototype.readToggler = function () {
@@ -38,7 +38,7 @@ function addBookToLibrary() {
 
   const book = new Book(title, author, pages, read);
 
-  myLibrary.push(book);
+  myLibrary.unshift(book);
 }
 
 // render books
@@ -46,23 +46,46 @@ function renderBooks() {
   const booksHtml = myLibrary
     .map((el, i) => {
       return `<article class="book" data-id=${i}>
-    <h4 class='book-content'>${el.info()}</h4>
+    <div class='book-content'>
+      <div>
+        <h4 class="book-title">${el.title}</h4>
+        <p class="book-by">by</p>
+        <h5 class="book-author">${el.author}</h5>
+      </div>
+      <div>
+        <span class="book-pages">${el.pages} pages</span>
+        <span class="book-read">${el.read ? "read" : "not read"}</span>
+      </div>
+    </div>
     <footer>
-      <input
-        type="checkbox"
-        class="toggle-read"
-        data-id=${i}
-        ${el.read ? "checked" : ""}
-      />
-      <button
-        class="delete-button"
-        data-id=${i}
-      >
-        <img
-          src="./images/trash-bin.svg"
-          alt="delete book icon"
-        />
-      </button>
+      <div class="dropBtn" onClick="toggleDropdown(event)"></div>
+      <div class="dropdown-content">
+        <div>
+          <label>
+          
+            <input
+              type="checkbox"
+              class="toggle-read"
+              data-id=${i}
+              ${el.read ? "checked" : ""}
+            />
+            <span>Toggle Read</span>
+          </label>
+          
+        </div>
+        <div>
+          <button
+            class="delete-button"
+            data-id=${i}
+          >
+            <img
+              src="./images/trash-bin.svg"
+              alt="delete book icon"
+            />
+            <span>Delete Book</span>
+          </button>
+        </div>
+      </div>
     </footer>
   </article>`;
     })
@@ -94,6 +117,14 @@ function addEventHandlersBook() {
   });
 }
 
+// dropdown function
+function toggleDropdown(e) {
+  const dropdownContent = e.target.nextElementSibling;
+  if (dropdownContent) {
+    dropdownContent.classList.toggle("show");
+  }
+}
+
 // The dialog box
 const addBookDialogBtn = document.getElementById("add-book");
 const dialog = document.getElementById("dialog");
@@ -109,15 +140,29 @@ const booksContainer = document.querySelector(".books-container");
 addBookDialogBtn.addEventListener("click", (e) => {
   dialog.showModal();
 });
-// cancel
+// cancel adding books
 cancelBtn.addEventListener("click", (e) => {
   e.preventDefault();
   dialog.close();
 });
-// submit
+// submit adding book
 form.addEventListener("submit", function () {
   addBookToLibrary.call(this);
   renderBooks(booksContainer);
 });
+
+// hide dropdown if click outside
+window.onclick = function (event) {
+  if (!event.target.matches(".dropBtn")) {
+    const dropdowns = document.getElementsByClassName("dropdown-content");
+    let i;
+    for (i = 0; i < dropdowns.length; i++) {
+      const openDropdown = dropdowns[i];
+      if (openDropdown.classList.contains("show")) {
+        openDropdown.classList.remove("show");
+      }
+    }
+  }
+};
 
 document.addEventListener("DOMContentLoaded", renderBooks);
