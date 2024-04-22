@@ -297,6 +297,10 @@ header {
       padding: 1rem;
       border-radius: 5px;
     }
+    & .dropdown-content label,
+    .dropdown-content button {
+      cursor: pointer;
+    }
     & .show {
       display: grid;
     }
