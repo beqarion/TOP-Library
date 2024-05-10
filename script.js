@@ -1,3 +1,23 @@
+// The Book Class
+class Book {
+  constructor(title, author, pages, read = false) {
+    this.title = title;
+    this.author = author;
+    this.pages = pages;
+    this.read = read;
+  }
+
+  info() {
+    return `${this.title} by ${this.author}, ${this.pages} pages, ${
+      this.read ? "read" : "not read"
+    }`;
+  }
+
+  readToggler() {
+    this.read = !this.read;
+  }
+}
+
 const myLibrary = [
   new Book("The Great Gatsby", "F. Scott Fitzgerald", 180, true),
   new Book("To Kill a Mockingbird", "Harper Lee", 281, false),
@@ -11,23 +31,6 @@ const myLibrary = [
   new Book("The Alchemist", "Paulo Coelho", 197, false),
 ];
 
-// The Book Class
-function Book(title, author, pages, read = false) {
-  this.title = title;
-  this.author = author;
-  this.pages = pages;
-  this.read = read;
-}
-Book.prototype.info = function () {
-  return `${this.title} by ${this.author}, ${this.pages} pages, ${
-    this.read ? "read" : "not read"
-  }`;
-};
-Book.prototype.readToggler = function () {
-  this.read = !this.read;
-};
-
-// submit handler function
 function addBookToLibrary() {
   const formData = new FormData(this);
 
